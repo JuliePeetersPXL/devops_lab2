@@ -1,0 +1,22 @@
+name: Uses Examples          # naam in de Actions-tab
+on: 
+  workflow_dispatch:            # trigger (workflow_dispatch, push, ...)
+
+jobs:
+  steps-example:
+    runs-on: ubuntu-latest
+    steps: 
+        - name: checkout code with an action
+          uses: actions/checkout@v4
+          
+        - name: Use python
+          uses: actions/setup-python@v5
+          with:
+            python-version: '3.13'
+            
+        - name: runs script
+          run: run python my_script.py
+          
+        - name: check directory output
+          run: ls -alhR testmachine             # shell-command
+        
