@@ -1,0 +1,17 @@
+name: Issue Trigger                 # naam van de workflow in de Actions-tab
+
+on:                                 # WANNEER start de workflow?
+  issues:                           # trigger: iets gebeurt met een issue
+    types: [opened]                 # alleen bij een NIEUW issue (niet bij edit/close)
+
+jobs:                               # WAT moet er gebeuren?
+  log-issue:                        # job-id (zelf gekozen naam, geen spaties)
+    runs-on: ubuntu-latest          # tijdelijke Ubuntu-machine van GitHub
+    steps:                          # lijst van stappen, in volgorde uitgevoerd
+      - name: Show issue title and body   # label van de stap in de logs
+        run: |                      # | = meerdere shell-commands onder elkaar
+          echo "Title: $TITLE"      # $TITLE = shell-variabele (uit env hieronder)
+          echo "Body: $BODY"        # $BODY  = shell-variabele (uit env hieronder)
+        env:                        # shell-variabelen aanmaken voor deze stap
+          TITLE: ${{ github.event.issue.title }}   # ${{ }} = GitHub-expressie, gegevens van het issue
+          BODY: ${{ github.event.issue.body }}     # via env = veilig tegen script injection
