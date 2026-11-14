@@ -28,4 +28,6 @@ jobs:
         run: echo "Running in test mode"
 
       - name: Show chosen environment
-        run: echo "Gekozen environment: $ENVIRONMENT"   # geen if = altijd uitgevoer
+        run: |
+          echo "Gekozen environment: $ENVIRONMENT"
+
