@@ -1,0 +1,31 @@
+name: Conditional
+
+on:
+  workflow_dispatch:
+    inputs: 
+      environment:
+        description: 'Kies een environment'   # tekst in het startvenster
+        required: true              # verplicht in te vullen
+        type: choice                # dropdown-lijst
+        options:                    # keuzemogelijkheden
+          - development
+          - staging
+          - production
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    env:                            # env op JOB-niveau = geldt voor alle steps
+      ENVIRONMENT: ${{ github.event.inputs.environment }}   # input → shell-variabele
+
+    steps:
+      - name: Deploy to production
+        if: github.event.inputs.environment == 'production'     # alleen bij production
+        run: echo "Deploying to production!"
+
+      - name: Test mode
+        if: github.event.inputs.environment == 'development' || github.event.inputs.environment == 'staging'   # || = OF
+        run: echo "Running in test mode"
+
+      - name: Show chosen environment
+        run: echo "Gekozen environment: $ENVIRONMENT"   # geen if = altijd uitgevoer
