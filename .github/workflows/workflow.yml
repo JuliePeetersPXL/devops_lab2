@@ -1,0 +1,9 @@
+name: Hello world          # naam in de Actions-tab
+on: 
+  workflow_dispatch            # trigger (workflow_dispatch, push, ...)
+
+jobs:
+  hello-world
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo hello world   # shell-command
