@@ -8,6 +8,9 @@ jobs:
     steps: 
         - name: make directory
           run: mkdir testmachine
-        - run: uname -a > testmachine/output.txt
-        - run: cat testmachine/output.txt               # shell-command
-        - run: ls -alhR testmachine
+        - name: execute uname command
+          run: uname -a > testmachine/output.txt
+        - name: check directory output
+          run: ls -alhR testmachine             # shell-command
+        - name: check contents of txt file
+          run: cat testmachine/output.txt  
