@@ -15,7 +15,7 @@ jobs:
             python-version: '3.13'
             
         - name: runs script
-          run: python workflows/my_script.py
+          run: python ./github/workflows/my_script.py
           
         - name: check directory output
           run: ls -alhR testmachine             # shell-command
