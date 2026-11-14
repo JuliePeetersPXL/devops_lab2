@@ -1,0 +1,20 @@
+name: Files          # naam in de Actions-tab
+on: 
+  workflow_dispatch:            # trigger (workflow_dispatch, push, ...)
+
+jobs:
+  steps-example:
+    runs-on: ubuntu-latest
+    steps: 
+        - name: make directory
+          run: mkdir files
+          
+        - name: make file with short text
+          run: echo "this is a short text" > files/file.txt 
+            
+        - name: run output
+          run: cat files/file.txt
+          
+        - name: check directory output
+          run: ls -alhR             # shell-command
+        
