@@ -1,0 +1,19 @@
+name: files
+on:
+  workflow_dispatch:
+
+jobs:
+  files-examples:
+    runs-on: ubuntu-latest
+    steps:
+      - name: make new directory
+        run: mkdir files
+
+      - name: write file in directory with text
+        run: echo "korte tekst" > ./files/file.txt
+
+      - name: show directory
+        run: ls -alhR files
+
+      - name: show output
+        run: cat ./files/file.txt

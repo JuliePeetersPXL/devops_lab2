@@ -1,0 +1,22 @@
+name: Dependencies
+on:
+  workflow_dispatch:
+
+jobs:
+  dependencies-examples:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7.0.1
+
+      - name: set nmp
+        run: sudo apt install npm # shell-command
+
+      - name: test npm
+        run: npm test
+
+      - name: start npm
+        run: npm start
+
+      - name: content directory
+        run: ls -alhR actions
