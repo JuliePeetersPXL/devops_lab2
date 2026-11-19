@@ -1,22 +1,22 @@
-name: Dependencies
+name: Dependencies Example # naam in de Actions-tab
+
 on:
-  workflow_dispatch:
+  workflow_dispatch: # manueel starten
 
 jobs:
-  dependencies-examples:
+  dependencies-example:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
+      - name: Checkout code # code van de repo op de runner zetten
         uses: actions/checkout@v7.0.1
 
-      - name: set nmp
-        run: sudo apt install npm # shell-command
+      - name: Setup Node # Node.js + npm installeren via action
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20" # gewenste Node-versie (tussen quotes)
 
-      - name: test npm
-        run: npm test
+      - name: Install dependencies # packages uit package.json → node_modules/
+        run: npm install
 
-      - name: start npm
-        run: npm start
-
-      - name: content directory
-        run: ls -alhR actions
+      - name: Check directory output
+        run: ls -alhR # toont alle bestanden, ook node_modules

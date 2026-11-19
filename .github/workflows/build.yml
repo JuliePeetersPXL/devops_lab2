@@ -1,0 +1,22 @@
+name: Build Example # naam in de Actions-tab
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code # code op de runner zetten
+        uses: actions/checkout@v7.0.1
+
+      - name: Setup Node # Node.js + npm installeren
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Install dependencies # maakt node_modules/ aan
+        run: npm install
+
+      - name: Bundle into zip # app-bestanden + node_modules in één zip
+        run: zip -r app.zip . -x ".git/*"

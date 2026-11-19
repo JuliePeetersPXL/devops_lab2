@@ -1,0 +1,31 @@
+name: Complete Example # zo staat het in de opgave (copy-paste van vorige)
+
+on:
+  workflow_dispatch:
+
+jobs:
+  complete:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v7.0.1
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run unit tests with coverage # tests + rapport in coverage/
+        run: npm test -- --coverage
+
+      - name: Bundle into zip # pas na geslaagde tests
+        run: zip -r app.zip . -x ".git/*"
+
+      - name: Upload coverage report # rapport bewaren na de run
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-report
+          path: coverage/
